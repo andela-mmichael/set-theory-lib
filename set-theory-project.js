@@ -1,31 +1,32 @@
-(function () {
-
 function Set(){        
     this.element = arguments[0] || [];
 
     //add elements
-    this.add = function(){
-        for(var i = 0; i < arguments.length; i++){
-            this.element.push(arguments[i]);
+    this.addElement = function(arr){
+        for(var i = 0; i < arr.length; i++){
+            this.element.push(arr[i]);
         }       
         return this.element;
     };
 
-    //remove elements
-    this.remove = function(){
-       for(var i = 0; i < arguments.length; i++){
-            var ind = this.element.indexOf(arguments[i]);
-            this.element.splice(ind,1);
+    //removes element
+    this.removeElement = function(arr){
+       for(var i = 0; i < this.element.length; i++){
+            if(this.element[i] === arr){
+                var ind = this.element.indexOf(arr);
+                this.element.splice(ind,1);
+                return this.element;
+            }            
         }
-        return this.element;
+        return "Not an Element";
     };
 
-    //check for cardinality
+    //find the cardinality of a set
     this.cardinality = function(){
         return this.element.length;
     };
 
-    //check for membership
+    //gets member of a set
     this.isMemberOf = function(m) {
         for (var i = 0; i < this.element.length; i++) {
             if(this.element[i] === m){
@@ -35,11 +36,8 @@ function Set(){
         return false;
     };
 
-    //check subset
+    //check for subset
     this.isSubsetOf = function(newset) {
-        if(!(newset instanceof Set)){
-            newset = new Set(newset);
-        }
         var i, j;
         for (i = 0; i < this.element.length; i++) {
             for(j = 0; j < newset.element.length; j++){
@@ -53,20 +51,17 @@ function Set(){
         }
         return true;
     };
-
-    //find powerset
+   
     this.powerSet = function(){
         var ps = [[]]; var i, j;
         for (i = 0; i < this.element.length; i++) {
             for (j = 0, len = ps.length; j < len; j++) {
-            ps.push(ps[j].concat(this.element.slice(i,i+1)));
+                ps.push(ps[j].concat(this.element.slice(i,i+1)));
             }
         }
         return ps;
     };
 }
-
-//join two sets
 Set.prototype.union = function(newset) {
     if(!(newset instanceof Set)){
         newset = new Set(newset);
@@ -77,8 +72,6 @@ Set.prototype.union = function(newset) {
     });
     return d.sort();
 };
-
-//find common elements
 Set.prototype.intersection = function(newset) {
    if(!(newset instanceof Set)){
         newset = new Set(newset);
@@ -89,7 +82,7 @@ Set.prototype.intersection = function(newset) {
     return intersect.sort();
 };
 
-//find complement of a set relative to another set
+ 
 Set.prototype.difference = function(newset){
     if(!(newset instanceof Set)){
         newset = new Set(newset);
@@ -100,7 +93,7 @@ Set.prototype.difference = function(newset){
     return diff;
 };
 
-//an extension of diffrence method
+
 Set.prototype.symmetricDifference = function(newset){
     if(!(newset instanceof Set)){
         newset = new Set(newset);
@@ -111,7 +104,7 @@ Set.prototype.symmetricDifference = function(newset){
     return z;
 };
 
-//cross product
+
 Set.prototype.cartesianProduct = function(newset) {
     if(!(newset instanceof Set)){
         newset = new Set(newset);
@@ -127,5 +120,3 @@ Set.prototype.cartesianProduct = function(newset) {
     } 
     return q;
 };
-
-});
