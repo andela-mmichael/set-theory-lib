@@ -1,5 +1,5 @@
 function Set(){        
-    this.element = [];
+    this.element = arguments[0] || [];
 
     //add elements
     this.addElement = function(arr){
@@ -51,8 +51,7 @@ function Set(){
         }
         return true;
     };
-    
-    //Gets all the subset
+   
     this.powerSet = function(){
         var ps = [[]]; var i, j;
         for (i = 0; i < this.element.length; i++) {
@@ -63,42 +62,53 @@ function Set(){
         return ps;
     };
 }
-
-//Joins the Sets
 Set.prototype.union = function(newset) {
+    if(!(newset instanceof Set)){
+        newset = new Set(newset);
+    }
     var c = this.element.concat(newset.element);
     var d = c.filter(function (item, pos) {
         return c.indexOf(item) == pos;
     });
     return d.sort();
 };
-
-//Gets the common elements
 Set.prototype.intersection = function(newset) {
+   if(!(newset instanceof Set)){
+        newset = new Set(newset);
+    }
     var intersect = this.element.filter(function(n) {
         return newset.element.indexOf(n) != -1;
     });
     return intersect.sort();
 };
 
-//Finds the elements in one set that is not in the other
-Set.prototype.difference = function(newset){    }
+ 
+Set.prototype.difference = function(newset){
+    if(!(newset instanceof Set)){
+        newset = new Set(newset);
+    }
     var diff = this.element.filter(function(n) {
         return newset.element.indexOf(n) === -1;
     });
     return diff;
 };
 
-//An extension of the difference method
+
 Set.prototype.symmetricDifference = function(newset){
+    if(!(newset instanceof Set)){
+        newset = new Set(newset);
+    }
     var x = this.difference(newset);
     var y = newset.difference(this);
     var z = x.concat(y);
     return z;
 };
 
-//Gets the Cross Product
+
 Set.prototype.cartesianProduct = function(newset) {
+    if(!(newset instanceof Set)){
+        newset = new Set(newset);
+    }
     var q = []; var i, j;
     for(i = 0; i < this.element.length; i++){
         for(j = 0; j < newset.element.length; j++){

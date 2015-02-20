@@ -88,6 +88,7 @@
 			<button type="button" id="int" class="btn btn-default" onclick="intersect()">Intersection</button><br><br>
 			<span id="viewR"></span>
 		</div>
+		<a href="http://justmel.github.io/set-theory-lib/doc.html">See documentation</a>
 	</div>
 
 </div>
@@ -98,6 +99,15 @@ var setA = new Set();
 var setB = new Set();
 function _addA(){
 	var x = document.getElementById('setA').value;
+	/*try {
+		if(!(x instanceof === Array) {
+			throw "Please follow the instruction!";
+		}
+	}
+	catch (err){
+		return alert(err);
+	}*/
+	console.log(x);
 	x = JSON.parse(x);
 	setA.addElement(x);		
 	document.getElementById("viewA").innerHTML = "Set A => " + setA.element;
