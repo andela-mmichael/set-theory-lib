@@ -1,12 +1,13 @@
 <!Doctype html>
 <html>
 <head> 
-	<title>Set Theory Library Project by Mel</title>
-	<link href='http://fonts.googleapis.com/css?family=Slabo+27px' rel='stylesheet' type='text/css'>
+	<title>Demo Page</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 	<link href='http://fonts.googleapis.com/css?family=PT+Sans' rel='stylesheet' type='text/css'>
+	<script src="lib/set-theory-project-test.js"></script>
 	<style>
 		body {	
-			font-family: 'PT Sans', sans-serif;/*font-family: 'Slabo 27px', serif;*/
+			font-family: 'PT Sans', sans-serif;
 			margin: 0; 
 			padding: 0;
 			background-color: #fafafa; 
@@ -14,7 +15,7 @@
 		}
 		#wrap {
 			margin: 0 auto; 
-			width: 760px; 
+			width: 960px; 
 			height: 100%; 
 			font-size: 16px;
 			/*background-color: #535353;*/
@@ -22,103 +23,119 @@
 		a { color: #0080ff; 
 			text-align: center; 
 		}
-		.code { 
-			text-align: center; 
-			background-color: #333; 
-			color: #fafafa;
+		.part-a {
+			width: 400px;
+			margin-left: 20px;
+			margin-right: 20px;
+			float: left;
 		}
-		.code samp {
-			color: #0080ff;
+		.part-b {
+			width: 400px;
+			margin-left: 20px;
+			margin-right: 20px;
+			float: right;
 		}
 		h1 { text-align: center; 
 			color: #cd2122;
 			text-decoration: underline;
 		}
-		h4 {
-			font-family: Garamond, serif;
-			font-size: 20px;
+		h3 {
+			text-align: center;
+			color: #0080ff;
 		}
 		p { 
 			text-align: justify;
 			line-height: 28px;
 		}
-		footer {
-			height: 40px;
-			background-color: #111;
-			color: #fff;
-			font-style: italic;
-			text-align: center;			
+		button {
+			margin-top: 10px;
+			margin-left: 175px;
+		}
+		#int {
+			margin-left: 20px;
+		}
+		.mid {
+			text-align: center;
+			clear: both;
+			margin-bottom: 20px;
 		}
 	</style>
 </head>
 <body>
 <div id="wrap">
-	<h1>Set Theory Library (JavaScript)</h1>
-	<p>
-		As the heading says, this is a library that performs set theory implementation as it is in mathematics. It happens to be one of the project I did during a bootcamp exercise. Although this hasn't been fully implemented in JavaScript, it is one of the features that will be added in the upcoming version of the ECMAScript standard i.e. ECMAScript 6 sometime around June 2015 (so watch out!). While waiting you can check out following basic operations my set theory library can perform.</p>
+	<h1>Set Theory JavaScript Library</h1>
+	<h3>DEMO PAGE</h3>
+	<div class="demo">
+		<code class="text-center">INSTRUCTION: Please enter the elements within a square bracket. E.g. [ 2,3,4,5]</code><br><br>
 
-	<p>The name of my class is Set. For example, say we create an object of Set called setA and another one say setB as shown below.</p>
-	<div class="code">
-		<code>
-			var setA = new Set();  <br/>
-			var setB = new Set();  <br/>
-		</code>
-	</div>
-	<p>	Both objects (i.e. setA and setB) are empty. So let's give more life to them by adding elements to the objects. We can add elements(numbers, arrays,strings) to them by using a add function like this: </p>
-	<div class="code">
-		<code>
-			setA.add(2, 4, 6, 8); 	<br/>
-				<samp>=> [ 2, 4, 6, 8 ] </samp>	<br/>
-			setB.add(0,1,2,3,4,5); 	<br/>
-				<samp>=> [ 0, 1, 2, 3, 4, 5 ] 	</samp><br/>
-		</code>
-	</div>
+		<div class="part-a">
+			<label>Enter Elements for Set A: </label> <input type="text" name="name" id="setA" /><br>
+			<button type="button" class="btn btn-default" onclick="_addA();">Add Elements</button><br>
+			<p id="viewA" class="alert alert-success" role="alert">Set A => </p>
+			<!-- <button type="button" class="btn btn-default" onclick="_removeA()">Remove Elements</button> -->
+			<!-- <button type="button" class="btn btn-default" onclick="psA()">Power Set of A</button> -->
+		</div>
+		<div class="part-b">
+			<label>Enter Elements for Set B: </label> <input type="text" name="name" id="setB" /><br>
 
-	<p>As you can see these elements are stored in an array. What if you want to remove certain elements from the objects. Then you can use the remove function to remove elements in any other. See illustration below. </p>
-	<div class="code">
-		<code>
-			setA.remove(8,2);<br/>
-				<samp>=> [ 4, 6 ]	</samp><br/>
-			setB.remove(0,2,5);	<br/>
-				<samp>=> [ 1, 3, 4 ]	</samp><br/>
-		</code>
+			<button type="button" class="text-center btn btn-default" id="setB" onclick="_addB()">Add Elements</button><br>
+			<p id="viewB" class="alert alert-success" role="alert">Set B => </p>
+			<!-- <button type="button" class="btn btn-default" id="setB" onclick="_removeB()">Remove Elements</button> -->
+			<!-- <button type="button" class="btn btn-default" onclick="psB()">Power Set of B</button> -->
+		</div>
+		<div class="mid">
+			<button type="button" id="int" class="btn btn-default" onclick="union()">Union</button>
+			<button type="button" id="int" class="btn btn-default" onclick="intersect()">Intersection</button><br><br>
+			<span id="viewR"></span>
+		</div>
 	</div>
 
-	<p>Wait! that's not all, my set theory library can also do stuffs like:</p>
-		<h4>Union of two sets (A u B)</h4>
-	<div class="code">
-			<code>
-				setA.union(setB);	<br/>
-					<samp>=> [ 1, 3, 4, 6 ]	</samp><br/>
-			</code>
-	</div>
-		<h4>Intersection of two sets (A n B)</h4>
-	<div class="code">
-			<code>
-				setA.intersection (setB); 	<br/>
-					<samp>=> [ 4 ]	</samp><br/>
-			</code>
-	</div>
-		<h4>Difference of two sets ( A - B) (also called <em>Complements</em>)</h4>
-	<div class="code">
-			<code>
-				setA.difference(setB); 	//What's in setA but not in setB<br/>
-					<samp>=> [ 6 ]</samp><br/>
-				setB.difference(setA); 	//What's in setB but not in setA<br/>
-					<samp>  => [ 1, 3 ]	</samp>	<br/>
-			</code> 
-	</div>
-	<p>Alright! don't let me spoil the fun. Go explore with other cool stuffs like:</p>
-	<ul>
-		<li>Cartesian Product (also Cross Product)</li>
-		<li>Elements of a set</li>
-		<li>Power Set</li>
-		<li>Cardinality of a set</li>
-		<li>Symmetrical difference between two sets</li>
-	</ul>
-	<p>You can check it out and download it on >>> <a href="https://github.com/justmel/set-theory-lib">Github</a></p>
-	<p style="font-style:italics;">NB: All contributions are incredibly welcome as long as they are standardly applicable.</p>
 </div>
 
+
+<script>
+var setA = new Set();
+var setB = new Set();
+function _addA(){
+	var x = document.getElementById('setA').value;
+	x = JSON.parse(x);
+	setA.addElement(x);		
+	document.getElementById("viewA").innerHTML = "Set A => " + setA.element;
+}
+function _addB(){
+	var y = document.getElementById('setB').value;
+	y = JSON.parse(y);
+	setB.addElement(y);	
+	document.getElementById("viewB").innerHTML = "Set B => " + setB.element;
+}
+function psA(){
+	var x = document.getElementById('setA').value;
+	x = JSON.parse(x);
+	setA.addElement(x);
+	var result = setA.powerSet();
+	console.log(result)	;
+	document.getElementById("viewA").innerHTML = "Power Set of A => " + result;
+}
+function _removeA(){
+	var x = document.getElementById('setA').value;
+	x = JSON.parse(x);
+	var result = setA.removeElement(x);		
+	document.getElementById("viewA").innerHTML = "Set A => " + result;
+}
+function _removeB(){
+	var y = document.getElementById('setB').value;
+	y = JSON.parse(y);
+	setB.removeElement(y);		
+	document.getElementById("viewB").innerHTML = "Set B => " + setB.element;
+}
+function union(){
+	var result = setA.union(setB);	
+	document.getElementById("viewR").innerHTML = "<p id=\"view\" class=\"alert alert-success text-center\" role=\"alert\">Union (A u B) => " + result + " </p>" ;
+}
+function intersect(){
+	var result = setA.intersection(setB);	
+	document.getElementById("viewR").innerHTML = "<p id=\"view\" class=\"alert alert-success text-center\" role=\"alert\">Intersection (A n B) => " + result + " </p>" ;
+}
+</script>
 </body>
 </html>

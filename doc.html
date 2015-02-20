@@ -1,0 +1,126 @@
+<!Doctype html>
+<html>
+<head> 
+	<title>Set Theory Library Project by Mel</title>
+	<link href='http://fonts.googleapis.com/css?family=Slabo+27px' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=PT+Sans' rel='stylesheet' type='text/css'>
+	<style>
+		body {	
+			font-family: 'PT Sans', sans-serif;/*font-family: 'Slabo 27px', serif;*/
+			margin: 0; 
+			padding: 0;
+			background-color: #fafafa; 
+			color:#111;
+		}
+		#wrap {
+			margin: 0 auto; 
+			width: 760px; 
+			height: 100%; 
+			font-size: 16px;
+			/*background-color: #535353;*/
+		}
+		a { color: #0080ff; 
+			text-align: center; 
+		}
+		.code { 
+			text-align: center; 
+			background-color: #333; 
+			color: #fafafa;
+		}
+		.code samp {
+			color: #0080ff;
+		}
+		h1 { text-align: center; 
+			color: #cd2122;
+			text-decoration: underline;
+		}
+		h4 {
+			font-family: Garamond, serif;
+			font-size: 20px;
+		}
+		p { 
+			text-align: justify;
+			line-height: 28px;
+		}
+		footer {
+			height: 40px;
+			background-color: #111;
+			color: #fff;
+			font-style: italic;
+			text-align: center;			
+		}
+	</style>
+</head>
+<body>
+<div id="wrap">
+	<h1>Set Theory Library (JavaScript)</h1>
+	<p>
+		As the heading says, this is a library that performs set theory implementation as it is in mathematics. It happens to be one of the project I did during a bootcamp exercise. Although this hasn't been fully implemented in JavaScript, it is one of the features that will be added in the upcoming version of the ECMAScript standard i.e. ECMAScript 6 sometime around June 2015 (so watch out!). While waiting you can check out following basic operations my set theory library can perform.
+	</p>
+	<p>Check out the <a href="http://justmel.github.io/set-theory-lib/">demo</a> here!</p>
+
+	<p>The name of my class is Set. For example, say we create an object of Set called setA and another one say setB as shown below.</p>
+	<div class="code">
+		<code>
+			var setA = new Set();  <br/>
+			var setB = new Set();  <br/>
+		</code>
+	</div>
+	<p>	Both objects (i.e. setA and setB) are empty. So let's give more life to them by adding elements to the objects. We can add elements(numbers, arrays,strings) to them by using a add function like this: </p>
+	<div class="code">
+		<code>
+			setA.add(2, 4, 6, 8); 	<br/>
+				<samp>=> [ 2, 4, 6, 8 ] </samp>	<br/>
+			setB.add(0,1,2,3,4,5); 	<br/>
+				<samp>=> [ 0, 1, 2, 3, 4, 5 ] 	</samp><br/>
+		</code>
+	</div>
+
+	<p>As you can see these elements are stored in an array. What if you want to remove certain elements from the objects. Then you can use the remove function to remove elements in any other. See illustration below. </p>
+	<div class="code">
+		<code>
+			setA.remove(8,2);<br/>
+				<samp>=> [ 4, 6 ]	</samp><br/>
+			setB.remove(0,2,5);	<br/>
+				<samp>=> [ 1, 3, 4 ]	</samp><br/>
+		</code>
+	</div>
+
+	<p>Wait! that's not all, my set theory library can also do stuffs like:</p>
+		<h4>Union of two sets (A u B)</h4>
+	<div class="code">
+			<code>
+				setA.union(setB);	<br/>
+					<samp>=> [ 1, 3, 4, 6 ]	</samp><br/>
+			</code>
+	</div>
+		<h4>Intersection of two sets (A n B)</h4>
+	<div class="code">
+			<code>
+				setA.intersection (setB); 	<br/>
+					<samp>=> [ 4 ]	</samp><br/>
+			</code>
+	</div>
+		<h4>Difference of two sets ( A - B) (also called <em>Complements</em>)</h4>
+	<div class="code">
+			<code>
+				setA.difference(setB); 	//What's in setA but not in setB<br/>
+					<samp>=> [ 6 ]</samp><br/>
+				setB.difference(setA); 	//What's in setB but not in setA<br/>
+					<samp>  => [ 1, 3 ]	</samp>	<br/>
+			</code> 
+	</div>
+	<p>Alright! don't let me spoil the fun. Go explore with other cool stuffs like:</p>
+	<ul>
+		<li>Cartesian Product (also Cross Product)</li>
+		<li>Elements of a set</li>
+		<li>Power Set</li>
+		<li>Cardinality of a set</li>
+		<li>Symmetrical difference between two sets</li>
+	</ul>
+	<p>You can check it out and download it on >>> <a href="https://github.com/justmel/set-theory-lib">Github</a></p>
+	<p style="font-style:italics;">NB: All contributions are incredibly welcome as long as they are standardly applicable.</p>
+</div>
+
+</body>
+</html>
